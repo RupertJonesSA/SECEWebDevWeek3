@@ -1,0 +1,1 @@
+20231007	17:28:59	6f1c222f-bde2-4544-a090-e6462be7255c	Error Not allowed by CORS
