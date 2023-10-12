@@ -5,7 +5,6 @@ const usersDB = {
     }
 }
 const jwt = require('jsonwebtoken');
-require('dotenv').config();
 
 const handleRefershToken = (req, res) => {
     const cookies = req.cookies;
@@ -20,8 +19,14 @@ const handleRefershToken = (req, res) => {
         process.env.REFRESH_TOKEN_SECRET,
         (err, decoded) => {
             if (err || foundUser.username !== decoded.username) return res.sendStatus(403);
+            const roles = Object.values(foundUser.roles); 
             const accessToken = jwt.sign(
-                { "username": decoded.username },
+                { 
+                    "UserInfor":{
+                        "username": decoded.username,
+                        "roles": roles
+                    }
+                },
                 proces.env.ACCESS_TOKEN_SECRET,
                 { expiresIn: '30s' } 
             );
